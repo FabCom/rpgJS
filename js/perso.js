@@ -35,8 +35,9 @@ class Character {
 }
 
 class Fighter extends Character {
-  constructor(hp=120, dmg=4, mana=40, name="Grace", status){
+  constructor(hp=12, dmg=4, mana=40, name="Grace", status){
     super(hp,dmg,mana,name,status);
+    this.class_name = "Fighter";
   }
 
   darkVision(victim) {
@@ -53,8 +54,9 @@ class Fighter extends Character {
 }
 
 class Paladin extends Character {
-  constructor(hp=160, dmg=3, mana=160,name="Ulder",status){
+  constructor(hp=16, dmg=3, mana=160,name="Ulder",status){
     super(hp,dmg,mana,name,status)
+    this.class_name = "Paladin";
   }
 
   healingLighting(victim) {
@@ -64,19 +66,22 @@ class Paladin extends Character {
 }
 
 class Monk extends Character {
-  constructor(hp=80, dmg=4, mana=0,name="maana",status){
+  constructor(hp=8, dmg=4, mana=0,name="Moana",status){
     super(hp,dmg,mana,name,status)
+    this.class_name = "Monk";
   }
 }
 
 class Berzerker extends Character {
-  constructor(hp=80, dmg=4, mana=0,name="Draven",status){
+  constructor(hp=8, dmg=4, mana=0,name="Draven",status){
     super(hp,dmg,mana,name,status)
+    this.class_name = "Berzerker";
   }
 
 }
 class Assassin extends Character {
-  constructor(hp=60, dmg=6, mana=20,name="Carl",status){
+  constructor(hp=6, dmg=6, mana=20,name="Carl",status){
     super(hp,dmg,mana,name,status)
+    this.class_name = "Assassin";
   }
 }

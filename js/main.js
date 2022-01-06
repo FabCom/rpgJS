@@ -25,8 +25,8 @@ class Game {
   }
 
   begin_turn(){
-    addElementToDiv("turn_counter", this.turn_count)
     resetDiv("turn_counter");
+    addElementToDiv("turn_counter", "Tour " + (11 - this.turn_count) + " sur 10")
     console.log(this.players)
     if (this.turn_count != 0){
       let turn = new Turn(this, this.players);
@@ -43,34 +43,42 @@ class Game {
 
 class Turn
 {
-  constructor(game,players,active_players=players, active_player, turn_status = 1)
+  constructor(game,players)
   {
     this.game = game
-    this.players = players;
-    this.active_players = active_players;
-    this.active_player = active_player;
-    this.turn_status = turn_status;
-    addElementToDiv("result","Joueurs encore en vie")
-    players.forEach(player => addElementToDiv("result",player.name))
+    this.players = players.filter(player => player.status == "playing");
+    this.active_players = this.players.slice();
+    this.active_player = null;    
   }
   
   target_select()
   {
-    let active_player = this.active_players[0];
-
-    this.players.forEach(victim => {this.createButtonTarget(active_player, victim)})
+    resetDiv("result");
+    addElementToDiv("result","Joueurs encore en vie")
+    this.players.filter(player => player.status == "playing").forEach(player => addElementToDiv("result",player.name +" hp: " + player.hp + " mana: " + player.mana + " Class: " + player.class_name))
+    this.active_player = this.active_players[0];
+    addElementToDiv("target", "C'est au tour de " + this.active_player.name)
+    addElementToDiv("target", "Qui attaques-tu ?")
+    let victims = this.players.filter(player => player != this.active_player)
+    victims.forEach(victim => {this.createButtonTarget(this.active_player, victim)})
   }
 
   switch_player()
   {
     resetDiv("target");
+    this.active_players = this.active_players.filter(player => player.status == "playing");
+    this.players = this.players.filter(player => player.status == "playing");
     this.active_players.splice(0, 1);
+    console.log("players : ")
+    console.log(this.players)
+    console.log("active_players : ")
+    console.log(this.active_players)
     console.log("Changement de personnage");
     if (this.active_players.length !== 0){
       this.target_select();
     } else {
       this.game.begin_turn();
-      console.log("Grrrrrr")
+      console.log("Nouveau tour")
     }
     
   }
@@ -79,7 +87,7 @@ class Turn
     let turn = this
     var ResultDiv = document.getElementById('target');
     var btn = document.createElement("BUTTON");
-    btn.innerHTML = victim.name + "<br>" + victim.hp;
+    btn.innerHTML = victim.name + "<br>" + "hp: " + victim.hp;
     btn.onclick = function(){
       player.dealDamage(victim);
       turn.switch_player();
