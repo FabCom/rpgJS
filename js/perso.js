@@ -15,9 +15,11 @@ class Character {
     if (this.hp <= 0) {
       this.status = "loser"
     }
+    console.log(this.name + " a maintenant " + this.hp + " hp")
   }
 
   dealDamage(victim) {
+    console.log(this.name + " attaque "+ victim.name + " et lui inflige "+ this.dmg + " dégats")
     victim.takeDamage(this.dmg)
     if (victim.status == "loser") {
       this.mana += 20
@@ -33,7 +35,7 @@ class Character {
 }
 
 class Fighter extends Character {
-  constructor(hp=12, dmg=4, mana=40, name="Grace", status){
+  constructor(hp=120, dmg=4, mana=40, name="Grace", status){
     super(hp,dmg,mana,name,status);
   }
 
@@ -51,7 +53,7 @@ class Fighter extends Character {
 }
 
 class Paladin extends Character {
-  constructor(hp=16, dmg=3, mana=160,name="Ulder",status){
+  constructor(hp=160, dmg=3, mana=160,name="Ulder",status){
     super(hp,dmg,mana,name,status)
   }
 
@@ -62,19 +64,19 @@ class Paladin extends Character {
 }
 
 class Monk extends Character {
-  constructor(hp=8, dmg=4, mana=0,name="maana",status){
+  constructor(hp=80, dmg=4, mana=0,name="maana",status){
     super(hp,dmg,mana,name,status)
   }
 }
 
 class Berzerker extends Character {
-  constructor(hp=8, dmg=4, mana=0,name="Draven",status){
+  constructor(hp=80, dmg=4, mana=0,name="Draven",status){
     super(hp,dmg,mana,name,status)
   }
 
 }
 class Assassin extends Character {
-  constructor(hp=6, dmg=6, mana=20,name="Carl",status){
+  constructor(hp=60, dmg=6, mana=20,name="Carl",status){
     super(hp,dmg,mana,name,status)
   }
 }
