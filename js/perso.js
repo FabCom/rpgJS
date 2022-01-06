@@ -37,7 +37,7 @@ class Character {
     }
   }
   hasEnoughMana(cost){
-    if (cost < this.mana) {
+    if (cost <= this.mana) {
       return true
     } else {
       return false
@@ -82,7 +82,7 @@ class Paladin extends Character {
 }
 
 class Monk extends Character {
-  constructor(hp=8, dmg=4, mana=200,name="Moana",status,shield){
+  constructor(hp=8, dmg=2, mana=200,name="Moana",status,shield){
     super(hp,dmg,mana,name,status,shield)
     this.class_name = "Monk";
   }
@@ -118,7 +118,7 @@ class Assassin extends Character {
     if (this.hasEnoughMana(cost)) {
       victim.takeDamage(7);
       this.mana -= cost;
-      this.shield=100
+      this.shield=100;
     }
   }
 
