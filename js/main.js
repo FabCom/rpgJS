@@ -56,7 +56,8 @@ class Turn
     resetDiv("result");
     addElementToDiv("result","Joueurs encore en vie")
     this.players.filter(player => player.status == "playing").forEach(player => addElementToDiv("result",player.name +" hp: " + player.hp + " mana: " + player.mana + " Class: " + player.class_name))
-    this.active_player = this.active_players[0];
+    var random_player = Math.floor(Math.random()*this.active_players.length);
+    this.active_player = this.active_players[random_player];
     addElementToDiv("target", "C'est au tour de " + this.active_player.name)
     addElementToDiv("target", "Qui attaques-tu ?")
     let victims = this.players.filter(player => player != this.active_player)
@@ -68,7 +69,9 @@ class Turn
     resetDiv("target");
     this.active_players = this.active_players.filter(player => player.status == "playing");
     this.players = this.players.filter(player => player.status == "playing");
-    this.active_players.splice(0, 1);
+    this.active_players = this.active_players.filter(player => player != this.active_player);
+    resetDiv("active_players")
+    this.active_players.forEach(player => addElementToDiv("active_players", player.name));
     console.log("players : ")
     console.log(this.players)
     console.log("active_players : ")
